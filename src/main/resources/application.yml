@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: thiago
+      password: 1234
+      database: unespiano
+      port: 27017
+      host: localhost

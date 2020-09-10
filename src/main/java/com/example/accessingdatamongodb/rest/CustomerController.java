@@ -6,40 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.accessingdatamongodb.entity.Customer;
-import com.example.accessingdatamongodb.repository.CustomerRepository;
+import com.example.accessingdatamongodb.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
-	private CustomerRepository repository;
-
+	private CustomerService service;
+	
 	@GetMapping("/save")
-	public void save() {
+	public void save(Customer customer) {
 
-		repository.deleteAll();
-		repository.save(new Customer("Alice", "Smith"));
-		repository.save(new Customer("Bob", "Smith"));
-
-		// fetch all customers
-		System.out.println("Customers found with findAll():");
-		System.out.println("-------------------------------");
-		for (Customer customer : repository.findAll()) {
-			System.out.println(customer);
-		}
-		System.out.println();
-
-		// fetch an individual customer
-		System.out.println("Customer found with findByFirstName('Alice'):");
-		System.out.println("--------------------------------");
-		System.out.println(repository.findByFirstName("Alice"));
-
-		System.out.println("Customers found with findByLastName('Smith'):");
-		System.out.println("--------------------------------");
-		for (Customer customer : repository.findByLastName("Smith")) {
-			System.out.println(customer);
-		}
+		service.save(customer);
 	}
 
 	
